@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { FloatingWhatsAppButton } from "@/components/FloatingWhatsAppButton";
 import { LaelConcierge } from "@/components/LaelConcierge";
+import { LaelInteractionBridge } from "@/components/LaelInteractionBridge";
 
 const cormorant = Cormorant_Garamond({ variable: "--font-cormorant-garamond", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </head>
     <body className="min-h-full flex flex-col bg-[#F7F1E8] text-[#29251F]">
       {children}
+      <LaelInteractionBridge />
       <FloatingWhatsAppButton />
       <LaelConcierge />
     </body>
