@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
@@ -159,9 +160,11 @@ export default function LaelPage() {
                 className="group relative overflow-hidden rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8]"
               >
                 <div className="overflow-hidden">
-                  <img
+                  <Image
                     src={card.image}
                     alt={card.title}
+                    width={900}
+                    height={1200}
                     className="h-[420px] w-full object-cover transition duration-700 group-hover:scale-[1.04]"
                   />
                 </div>
@@ -180,7 +183,7 @@ export default function LaelPage() {
               <SectionLabel>The LAEL Edit</SectionLabel>
               <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] leading-[0.9] tracking-[-0.06em]">THE LAEL EDIT</h2>
             </div>
-            <p className="max-w-xl text-base leading-8 text-[#4d443d]">Pieces you'll reach for again and again.</p>
+            <p className="max-w-xl text-base leading-8 text-[#4d443d]">Pieces you&apos;ll reach for again and again.</p>
           </motion.div>
 
           <div className="mb-8 flex flex-wrap gap-3 text-[0.7rem] uppercase tracking-[0.28em] text-[#75695B]">
@@ -200,9 +203,11 @@ export default function LaelPage() {
                 className={`group overflow-hidden rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8] ${index === 0 || index === 2 ? 'xl:col-span-2' : ''}`}
               >
                 <div className="overflow-hidden">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={900}
+                    height={1200}
                     className={`w-full object-cover transition duration-700 group-hover:scale-[1.04] ${index === 0 || index === 2 ? 'h-[400px]' : 'h-[300px]'}`}
                   />
                 </div>
@@ -258,7 +263,7 @@ export default function LaelPage() {
                 className="group overflow-hidden rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8]"
               >
                 <div className="overflow-hidden">
-                  <img src={look.image} alt={look.title} className="h-[420px] w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
+                  <Image src={look.image} alt={look.title} width={900} height={1200} className="h-[420px] w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
                 </div>
                 <div className="space-y-4 p-6">
                   <h3 className="font-serif text-3xl tracking-[-0.04em]">{look.title}</h3>
@@ -287,7 +292,7 @@ export default function LaelPage() {
                   transition={{ delay: index * 0.08, duration: 0.7 }}
                   className={`group overflow-hidden rounded-[1.8rem] border border-[#29251F]/10 bg-[#EFE5D6] ${tile.className}`}
                 >
-                  <img src={tile.image} alt={tile.title} className="h-full min-h-[220px] w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
+                  <Image src={tile.image} alt={tile.title} width={900} height={1200} className="h-full min-h-[220px] w-full object-cover transition duration-700 group-hover:scale-[1.04]" />
                   <figcaption className="px-4 py-3 text-[0.62rem] uppercase tracking-[0.26em] text-[#75695B]">{tile.title}</figcaption>
                 </motion.figure>
               ))}
@@ -309,7 +314,7 @@ export default function LaelPage() {
                 transition={{ delay: index * 0.08, duration: 0.7 }}
                 className="overflow-hidden rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8]"
               >
-                <img src={moment.image} alt={moment.title} className="h-[360px] w-full object-cover" />
+                <Image src={moment.image} alt={moment.title} width={900} height={1200} className="h-[360px] w-full object-cover" />
                 <figcaption className="px-4 py-4 text-[0.62rem] uppercase tracking-[0.26em] text-[#75695B]">{moment.title}</figcaption>
               </motion.figure>
             ))}
@@ -335,7 +340,7 @@ export default function LaelPage() {
                   whileHover={{ y: -6 }}
                   className="min-w-[260px] rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8] p-4 shadow-[0_18px_40px_rgba(58,47,41,0.04)]"
                 >
-                  <img src={product.image} alt={product.name} className="h-[280px] w-full rounded-[1.4rem] object-cover" />
+                  <Image src={product.image} alt={product.name} width={900} height={1100} className="h-[280px] w-full rounded-[1.4rem] object-cover" />
                   <div className="mt-4 flex items-center justify-between text-[#75695B]">
                     <span className="text-[0.6rem] uppercase tracking-[0.22em]">★ {product.rating}</span>
                     <button aria-label={`Save ${product.name}`} className="text-lg">♡</button>
@@ -353,7 +358,7 @@ export default function LaelPage() {
 
         <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:px-10">
           <motion.blockquote {...fadeUp} className="border-l border-[#B79A6A] pl-6 text-[clamp(1.6rem,3vw,3rem)] font-serif leading-[1.1] tracking-[-0.05em] text-[#29251F]">
-            “The kind of jewellery you forget you're wearing — until someone asks where it's from.”
+            &ldquo;The kind of jewellery you forget you&apos;re wearing — until someone asks where it&apos;s from.&rdquo;
           </motion.blockquote>
         </section>
 
@@ -387,7 +392,7 @@ export default function LaelPage() {
         <section className="overflow-hidden bg-[#EFE5D6] py-20">
           <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
             <motion.div {...fadeUp} className="relative overflow-hidden rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8] p-6">
-              <img src="/images/packaging-hero.svg" alt="LAEL packaging moment" className="h-[500px] w-full rounded-[1.5rem] object-cover" />
+              <Image src="/images/packaging-hero.svg" alt="LAEL packaging moment" width={1200} height={1000} className="h-[500px] w-full rounded-[1.5rem] object-cover" />
             </motion.div>
             <motion.div {...fadeUp} transition={{ delay: 0.1, duration: 0.7 }} className="flex flex-col justify-center">
               <SectionLabel>Packaging</SectionLabel>
@@ -402,13 +407,13 @@ export default function LaelPage() {
         <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <motion.div {...fadeUp} className="overflow-hidden rounded-[2rem] border border-[#29251F]/10 bg-[#FFFDF8]">
-              <img src="/images/story-portrait.svg" alt="Our story editorial image" className="h-[580px] w-full object-cover" />
+              <Image src="/images/story-portrait.svg" alt="Our story editorial image" width={1000} height={1300} className="h-[580px] w-full object-cover" />
             </motion.div>
             <motion.div {...fadeUp} transition={{ delay: 0.12, duration: 0.7 }}>
               <SectionLabel>Our story</SectionLabel>
               <h2 className="font-serif text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[0.9] tracking-[-0.06em]">WHY LAEL?</h2>
               <p className="mt-6 text-lg leading-9 text-[#4d443d]">
-                LAEL was created for women who want jewellery that feels effortless, timeless and easy to wear every day.
+                LAEL was created for women who want jewellery that feels effortless, timeless, and easy to wear every day.
               </p>
               <button className="mt-8 rounded-full bg-[#1D1A17] px-6 py-3 text-[0.68rem] uppercase tracking-[0.24em] text-[#FFFDF8]">
                 READ OUR STORY
@@ -438,7 +443,7 @@ export default function LaelPage() {
                   className="rounded-[2rem] border border-[#29251F]/10 bg-[#F7F1E8] p-5"
                 >
                   <div className="mb-5 overflow-hidden rounded-[1.3rem]">
-                    <img src={`/images/journal-${index + 1}.svg`} alt={article} className="h-48 w-full object-cover" />
+                    <Image src={`/images/journal-${index + 1}.svg`} alt={article} width={800} height={600} className="h-48 w-full object-cover" />
                   </div>
                   <p className="text-[0.65rem] uppercase tracking-[0.26em] text-[#75695B]">Journal</p>
                   <h3 className="mt-3 text-lg leading-7 text-[#29251F]">{article}</h3>

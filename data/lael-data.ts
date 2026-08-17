@@ -10,7 +10,7 @@ export const discoverCards = [
   {
     id: "timeless",
     title: "TIMELESS",
-    description: "Styles that don't depend on fleeting trends.",
+    description: "Styles that don&apos;t depend on fleeting trends.",
     image: "/images/editorial-timeless.svg",
   },
   {
