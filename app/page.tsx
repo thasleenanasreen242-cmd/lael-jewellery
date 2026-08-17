@@ -1,5 +1,5 @@
-import LaelPage from "@/components/LaelPage";
+import LaelHome from "@/components/LaelHome";
 
 export default function Home() {
-  return <LaelPage />;
+  return <LaelHome />;
 }
