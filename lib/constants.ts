@@ -24,9 +24,9 @@ export const NAV_LINKS = [
   { label: "CARE", href: "/care" },
 ];
 
-// Configure this in Vercel/your local .env.local file.
-// Keep the value empty until the real LAEL WhatsApp number is available.
-export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+// LAEL WhatsApp business number (India).
+// Can still be overridden with NEXT_PUBLIC_WHATSAPP_NUMBER in Vercel.
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919847641809";
 
 export const WHATSAPP_MESSAGES = {
   homepage: "Hi LAEL 👋 I'd like to know more about your jewellery.",
