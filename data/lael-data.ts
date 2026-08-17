@@ -1,103 +1,42 @@
 export const navigation = ["SHOP", "EDIT", "STORY", "JOURNAL", "CARE"];
 
 export const discoverCards = [
-  {
-    id: "everyday",
-    title: "EVERYDAY",
-    description: "Jewellery designed for your everyday rituals.",
-    image: "/images/editorial-everyday.svg",
-  },
-  {
-    id: "timeless",
-    title: "TIMELESS",
-    description: "Styles that don&apos;t depend on fleeting trends.",
-    image: "/images/editorial-timeless.svg",
-  },
-  {
-    id: "anti-tarnish",
-    title: "ANTI-TARNISH",
-    description: "Designed with an anti-tarnish finish for lasting beauty.",
-    image: "/images/editorial-anti-tarnish.svg",
-  },
+  { id: "everyday", title: "EVERYDAY", description: "Jewellery designed for your everyday rituals.", image: "/images/editorial-everyday.svg" },
+  { id: "timeless", title: "TIMELESS", description: "Styles that don't depend on fleeting trends.", image: "/images/editorial-timeless.svg" },
+  { id: "anti-tarnish", title: "ANTI-TARNISH", description: "Designed with an anti-tarnish finish for lasting beauty.", image: "/images/editorial-anti-tarnish.svg" },
 ];
 
 export const editProducts = [
-  {
-    category: "EARRINGS",
-    name: "Rhea Drop",
-    price: "$98",
-    image: "/images/product-earrings.svg",
-    accent: "gold",
-  },
-  {
-    category: "NECKLACES",
-    name: "Aster Chain",
-    price: "$152",
-    image: "/images/product-necklace.svg",
-    accent: "cream",
-  },
-  {
-    category: "RINGS",
-    name: "Soleil Ring",
-    price: "$118",
-    image: "/images/product-ring.svg",
-    accent: "taupe",
-  },
-  {
-    category: "BRACELETS",
-    name: "Alina Cuff",
-    price: "$136",
-    image: "/images/product-bracelet.svg",
-    accent: "gold",
-  },
-  {
-    category: "SETS",
-    name: "Dune Set",
-    price: "$224",
-    image: "/images/product-set.svg",
-    accent: "cream",
-  },
+  { category: "EARRINGS", name: "Rhea Drop", price: "$98", image: "/images/product-earrings.svg", accent: "gold" },
+  { category: "NECKLACES", name: "Aster Chain", price: "$152", image: "/images/product-necklace.svg", accent: "cream" },
+  { category: "RINGS", name: "Soleil Ring", price: "$118", image: "/images/product-ring.svg", accent: "taupe" },
+  { category: "BRACELETS", name: "Alina Cuff", price: "$136", image: "/images/product-bracelet.svg", accent: "gold" },
+  { category: "SETS", name: "Dune Set", price: "$224", image: "/images/product-set.svg", accent: "cream" },
 ];
 
 export const lookCards = [
   {
     title: "THE MINIMALIST",
-    image: "/images/look-minimalist.svg",
+    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=85",
     caption: "Quiet texture. Clean lines. Everyday shine.",
   },
   {
     title: "THE STACK",
-    image: "/images/look-stack.svg",
+    image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=1200&q=85",
     caption: "Layered pieces with easy movement and light.",
   },
   {
     title: "THE STATEMENT",
-    image: "/images/look-statement.svg",
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85",
     caption: "A confident finish for evenings and milestones.",
   },
 ];
 
 export const masonryTiles = [
-  {
-    title: "THE EVERYDAY EDIT",
-    image: "/images/masonry-1.svg",
-    className: "md:col-span-1 md:row-span-2",
-  },
-  {
-    title: "SOFT GOLDEN HOURS",
-    image: "/images/masonry-2.svg",
-    className: "md:col-span-2",
-  },
-  {
-    title: "YOUR SIGNATURE PIECE",
-    image: "/images/masonry-3.svg",
-    className: "md:col-span-1",
-  },
-  {
-    title: "LESS, BUT BETTER",
-    image: "/images/masonry-4.svg",
-    className: "md:col-span-2",
-  },
+  { title: "THE EVERYDAY EDIT", image: "/images/masonry-1.svg", className: "md:col-span-1 md:row-span-2" },
+  { title: "SOFT GOLDEN HOURS", image: "/images/masonry-2.svg", className: "md:col-span-2" },
+  { title: "YOUR SIGNATURE PIECE", image: "/images/masonry-3.svg", className: "md:col-span-1" },
+  { title: "LESS, BUT BETTER", image: "/images/masonry-4.svg", className: "md:col-span-2" },
 ];
 
 export const lifestyleMoments = [
@@ -126,15 +65,7 @@ export const journalArticles = [
 ];
 
 export const instagramImages = [
-  "/images/insta-1.svg",
-  "/images/insta-2.svg",
-  "/images/insta-3.svg",
-  "/images/insta-4.svg",
-  "/images/insta-5.svg",
-  "/images/insta-6.svg",
-  "/images/insta-7.svg",
-  "/images/insta-8.svg",
-  "/images/insta-9.svg",
+  "/images/insta-1.svg", "/images/insta-2.svg", "/images/insta-3.svg", "/images/insta-4.svg", "/images/insta-5.svg", "/images/insta-6.svg", "/images/insta-7.svg", "/images/insta-8.svg", "/images/insta-9.svg",
 ];
 
 export const careSteps = [
@@ -143,9 +74,4 @@ export const careSteps = [
   { title: "CARE", text: "Wipe gently after wear with a soft cloth and store away from moisture and fragrance." },
 ];
 
-export const ritualMoments = [
-  "WEAR IT.",
-  "LIVE IN IT.",
-  "LOVE IT.",
-  "KEEP THE SHINE.",
-];
+export const ritualMoments = ["WEAR IT.", "LIVE IN IT.", "LOVE IT.", "KEEP THE SHINE."];
