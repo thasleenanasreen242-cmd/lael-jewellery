@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { products } from "@/data/products";
 import { useCart } from "@/lib/store";
+import { WishlistButton } from "@/components/WishlistButton";
 
 type SortOption = "featured" | "price-asc" | "price-desc" | "newest";
 
@@ -144,6 +145,8 @@ export default function ShopPage() {
                     + Add
                   </button>
                 </div>
+
+                <WishlistButton productSlug={product.slug} />
               </div>
             </motion.div>
           ))}

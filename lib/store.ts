@@ -132,6 +132,15 @@ export function useWishlist() {
     });
   }, []);
 
+  const toggleItemBySlug = useCallback((slug: string) => {
+    setItems((prev) => {
+      if (prev.some((i) => i.productSlug === slug)) {
+        return prev.filter((i) => i.productSlug !== slug);
+      }
+      return prev;
+    });
+  }, []);
+
   const contains = (slug: string) => {
     return items.some((i) => i.productSlug === slug);
   };
@@ -140,5 +149,5 @@ export function useWishlist() {
     return items.length;
   };
 
-  return { items, addItem, removeItem, toggleItem, contains, getCount, isHydrated };
+  return { items, addItem, removeItem, toggleItem, toggleItemBySlug, contains, getCount, isHydrated };
 }
