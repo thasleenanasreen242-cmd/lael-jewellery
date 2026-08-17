@@ -25,6 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <head>
       <link rel="canonical" href={siteUrl} />
       <link rel="stylesheet" href="/lael-hero-live.css" />
+      <link rel="stylesheet" href="/lael-edit-uniform.css" />
       <meta name="theme-color" content="#F7F1E8" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
