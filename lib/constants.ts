@@ -6,35 +6,34 @@ export const BRAND = {
   mission: "Everyday elegance. Quiet confidence. Timeless beauty.",
 };
 
-// Colors
 export const COLORS = {
-  primary: "#F7F1E8", // Primary beige
-  cream: "#FFFDF8", // Cream
-  secondary: "#EFE5D6", // Secondary beige
-  taupe: "#B9AA97", // Warm taupe
-  brown: "#75695B", // Brown
-  text: "#29251F", // Text
-  gold: "#B79A6A", // Subtle gold
+  primary: "#F7F1E8",
+  cream: "#FFFDF8",
+  secondary: "#EFE5D6",
+  taupe: "#B9AA97",
+  brown: "#75695B",
+  text: "#29251F",
+  gold: "#B79A6A",
 };
 
-// Navigation
 export const NAV_LINKS = [
   { label: "SHOP", href: "/shop" },
-  { label: "EDIT", href: "/shop" }, // Points to shop for now
+  { label: "EDIT", href: "/shop" },
   { label: "STORY", href: "/story" },
   { label: "JOURNAL", href: "/journal" },
   { label: "CARE", href: "/care" },
 ];
 
-// WhatsApp Configuration
-export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+1234567890";
+// Configure this in Vercel/your local .env.local file.
+// Keep the value empty until the real LAEL WhatsApp number is available.
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+
 export const WHATSAPP_MESSAGES = {
   homepage: "Hi LAEL 👋 I'd like to know more about your jewellery.",
   product: (productName: string) => `Hi LAEL 👋 I'm interested in ${productName}. Can you tell me more?`,
-  cart: () => `Hi LAEL 👋 I'd like to order. Can you help me?`,
+  cart: (items?: string) => `Hi LAEL 👋 I'd like help with my order.${items ? `\n\n${items}` : ""}`,
 };
 
-// Animation timings
 export const ANIMATION = {
   duration: {
     fast: 0.3,
