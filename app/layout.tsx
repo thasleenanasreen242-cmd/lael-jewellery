@@ -4,6 +4,7 @@ import "./globals.css";
 import { FloatingWhatsAppButton } from "@/components/FloatingWhatsAppButton";
 import { LaelConcierge } from "@/components/LaelConcierge";
 import { LaelInteractionBridge } from "@/components/LaelInteractionBridge";
+import { PageBackButton } from "@/components/PageBackButton";
 
 const cormorant = Cormorant_Garamond({ variable: "--font-cormorant-garamond", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
@@ -31,6 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </head>
     <body className="min-h-full flex flex-col bg-[#F7F1E8] text-[#29251F]">
       {children}
+      <div className="fixed left-4 top-[88px] z-[9996] sm:left-6 sm:top-[96px]">
+        <PageBackButton />
+      </div>
       <LaelInteractionBridge />
       <FloatingWhatsAppButton />
       <LaelConcierge />
