@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# Next.js output
+.next/
+out/
+
+# environment files
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+
+# production
+/build
+
+# Vercel
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db

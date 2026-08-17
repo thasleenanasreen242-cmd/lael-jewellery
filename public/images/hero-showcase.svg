@@ -1,0 +1,24 @@
+<svg width="1200" height="1500" viewBox="0 0 1200 1500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1500" fill="#E9DCCB"/>
+  <rect x="80" y="80" width="1040" height="1340" rx="56" fill="#F7F1E8"/>
+  <circle cx="935" cy="315" r="170" fill="#F0E9E1"/>
+  <circle cx="315" cy="1140" r="210" fill="#E7D7C1"/>
+  <path d="M370 1110C419 897 504 751 666 605C755 526 828 465 906 414C850 484 812 585 804 667C798 729 803 785 823 854C847 944 900 1018 954 1092C866 1153 809 1181 703 1244C603 1301 486 1341 370 1110Z" fill="#C8A96E" fill-opacity="0.85"/>
+  <path d="M470 1107C521 904 600 781 736 664C785 623 840 583 901 550C861 640 846 719 852 794C860 899 909 963 975 1043C904 1107 833 1162 740 1220C648 1275 564 1291 470 1107Z" fill="#B89B68" fill-opacity="0.9"/>
+  <path d="M460 655C555 608 650 591 738 593C688 664 646 746 633 824C619 906 640 973 693 1018C630 1062 551 1046 490 995C430 946 399 869 406 790C411 731 432 692 460 655Z" fill="#D7C19A" fill-opacity="0.8"/>
+  <circle cx="667" cy="764" r="118" fill="#B99E66" fill-opacity="0.85"/>
+  <circle cx="666" cy="762" r="72" fill="#F1E3CC"/>
+  <path d="M626 829L610 907" stroke="#B89A66" stroke-width="16" stroke-linecap="round"/>
+  <path d="M706 830L725 905" stroke="#B89A66" stroke-width="16" stroke-linecap="round"/>
+  <path d="M587 850C635 878 687 885 749 860" stroke="#B89A66" stroke-width="15" stroke-linecap="round"/>
+  <path d="M655 454C709 504 794 523 869 519" stroke="#B89A66" stroke-width="14" stroke-linecap="round"/>
+  <path d="M436 575C523 494 613 452 743 446" stroke="#B89A66" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="883" cy="296" r="96" fill="#F3E7D3"/>
+  <circle cx="883" cy="296" r="56" fill="#C7A564"/>
+  <path d="M883 217V374" stroke="#C7A564" stroke-width="10" stroke-linecap="round"/>
+  <path d="M806 296H960" stroke="#C7A564" stroke-width="10" stroke-linecap="round"/>
+  <g opacity="0.8">
+    <circle cx="335" cy="284" r="56" fill="#E9D9B8"/>
+    <circle cx="335" cy="284" r="28" fill="#C7A564"/>
+  </g>
+</svg>
