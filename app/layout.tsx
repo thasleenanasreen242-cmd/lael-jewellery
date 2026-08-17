@@ -32,9 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </head>
     <body className="min-h-full flex flex-col bg-[#F7F1E8] text-[#29251F]">
       {children}
-      <div className="fixed left-4 top-[88px] z-[9996] sm:left-6 sm:top-[96px]">
-        <PageBackButton />
-      </div>
+      <PageBackButton />
       <LaelInteractionBridge />
       <FloatingWhatsAppButton />
       <LaelConcierge />
