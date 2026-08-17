@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { SearchOverlay } from "./SearchOverlay";
+import { ShoppingCart } from "./ShoppingCart";
 import {
   bestsellerProducts,
   careSteps,
@@ -68,6 +70,8 @@ function BrandReveal() {
 }
 
 export default function LaelPage() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#F7F1E8] text-[#29251F]">
       <BrandReveal />
@@ -85,12 +89,14 @@ export default function LaelPage() {
           </div>
 
           <div className="flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.24em] text-[#29251F]/80">
-            <button className="hidden sm:inline transition hover:text-[#75695B]">Search</button>
+            <button onClick={() => setIsSearchOpen(true)} className="hidden sm:inline transition hover:text-[#75695B]">Search</button>
             <button className="transition hover:text-[#75695B]">Wishlist</button>
-            <button className="transition hover:text-[#75695B]">Bag</button>
+            <ShoppingCart />
           </div>
         </nav>
       </header>
+
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
       <main>
         <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-8 sm:px-8 lg:px-10 lg:pb-16 lg:pt-12">
