@@ -27,7 +27,7 @@ export const discoverCards = [
 export const editProducts = [
   { category: "EARRINGS", name: "Rhea Drop", price: "$98", image: jewelryImages[6], accent: "gold" },
   { category: "NECKLACES", name: "Aster Chain", price: "$152", image: jewelryImages[7], accent: "cream" },
-  { category: "RINGS", name: "Soleil Ring", price: "$118", image: jewelryImages[8], accent: "taupe" },
+  { category: "RINGS", name: "Soleil Ring", price: "$118", image: jewelryImages[3], accent: "taupe" },
   { category: "BRACELETS", name: "Alina Cuff", price: "$136", image: jewelryImages[9], accent: "gold" },
   { category: "SETS", name: "Dune Set", price: "$224", image: jewelryImages[10], accent: "cream" },
 ];
