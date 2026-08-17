@@ -22,7 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return <html lang="en" className={`${cormorant.variable} ${manrope.variable} h-full antialiased`}>
     <head>
       <link rel="canonical" href={siteUrl} />
-      <link rel="stylesheet" href="/lael-glow.css" />
+      <link rel="stylesheet" href="/lael-hero-live.css" />
       <meta name="theme-color" content="#F7F1E8" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
