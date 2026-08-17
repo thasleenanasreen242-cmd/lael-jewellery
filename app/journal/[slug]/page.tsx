@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { JsonLdClient } from "@/components/JsonLdClient";
+import { generateArticleSchema } from "@/lib/schema";
 
 interface ArticleBlock {
   type: "paragraph" | "heading";
@@ -313,7 +315,13 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <main className="min-h-screen bg-[#F7F1E8] text-[#29251F]">
+    <>
+      <JsonLdClient schema={generateArticleSchema({
+        title: article.title,
+        date: article.date,
+        slug: params.slug,
+      })} />
+      <main className="min-h-screen bg-[#F7F1E8] text-[#29251F]">
       <header className="sticky top-0 z-40 border-b border-[#29251F]/10 bg-[#F7F1E8]/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
           <Link href="/" className="text-xl font-medium tracking-[0.18em]">LAEL</Link>
@@ -364,5 +372,6 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         </div>
       </article>
     </main>
+    </>
   );
 }

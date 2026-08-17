@@ -66,17 +66,17 @@ export function generateProductSchema(product: {
 
 export function generateArticleSchema(article: {
   title: string;
-  description: string;
   date: string;
-  slug: string;
+  slug?: string;
+  description?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: article.title,
-    description: article.description,
-    datePublished: new Date(article.date).toISOString(),
-    url: `https://lael-jewellery.vercel.app/journal/${article.slug}`,
+    description: article.description || article.title,
+    datePublished: article.date,
+    url: `https://lael-jewellery.vercel.app/journal/${article.slug || 'article'}`,
     author: {
       "@type": "Organization",
       name: "LAEL",

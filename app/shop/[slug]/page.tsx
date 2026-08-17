@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import { products } from "@/data/products";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useCart } from "@/lib/store";
+import { JsonLdClient } from "@/components/JsonLdClient";
+import { generateProductSchema } from "@/lib/schema";
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
   const product = products.find((item) => item.slug === params.slug);
@@ -36,7 +38,9 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
   const addToCartMessage = `Hi LAEL, I&apos;m interested in ${product.name}. Can you tell me more?`;
 
   return (
-    <main className="min-h-screen bg-[#F7F1E8] px-5 py-12 text-[#29251F] sm:px-8 lg:px-10">
+    <>
+      <JsonLdClient schema={generateProductSchema(product)} />
+      <main className="min-h-screen bg-[#F7F1E8] px-5 py-12 text-[#29251F] sm:px-8 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <Link href="/shop" className="mb-8 inline-block text-[0.68rem] uppercase tracking-[0.24em] text-[#75695B]">← Back to shop</Link>
 
@@ -104,5 +108,6 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         </div>
       </div>
     </main>
+    </>
   );
 }
