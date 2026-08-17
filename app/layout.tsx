@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { FloatingWhatsAppButton } from "@/components/FloatingWhatsAppButton";
+import { FloatingBagButton } from "@/components/FloatingBagButton";
 import { LaelConcierge } from "@/components/LaelConcierge";
 import { LaelInteractionBridge } from "@/components/LaelInteractionBridge";
 import { PageBackButton } from "@/components/PageBackButton";
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <PageBackButton />
       <LaelInteractionBridge />
       <FloatingWhatsAppButton />
+      <FloatingBagButton />
       <LaelConcierge />
     </body>
   </html>;
