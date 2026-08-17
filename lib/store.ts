@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useSyncExternalStore } from "react";
 
 export interface CartItem {
   productSlug: string;
@@ -20,134 +20,177 @@ export interface WishlistItem {
 const CART_STORAGE_KEY = "lael-cart";
 const WISHLIST_STORAGE_KEY = "lael-wishlist";
 
-// Cart Management
+type Listener = () => void;
+
+let cartItems: CartItem[] = [];
+let wishlistItems: WishlistItem[] = [];
+let cartHydrated = false;
+let wishlistHydrated = false;
+const cartListeners = new Set<Listener>();
+const wishlistListeners = new Set<Listener>();
+let hydrationStarted = false;
+
+function emit(listeners: Set<Listener>) {
+  listeners.forEach((listener) => listener());
+}
+
+function safeParse<T>(value: string | null, fallback: T): T {
+  if (!value) return fallback;
+  try {
+    const parsed = JSON.parse(value);
+    return parsed as T;
+  } catch {
+    return fallback;
+  }
+}
+
+function persistCart() {
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+  }
+}
+
+function persistWishlist() {
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(wishlistItems));
+  }
+}
+
+function startHydration() {
+  if (hydrationStarted || typeof window === "undefined") return;
+  hydrationStarted = true;
+  cartItems = safeParse<CartItem[]>(window.localStorage.getItem(CART_STORAGE_KEY), []);
+  wishlistItems = safeParse<WishlistItem[]>(window.localStorage.getItem(WISHLIST_STORAGE_KEY), []);
+  cartHydrated = true;
+  wishlistHydrated = true;
+  emit(cartListeners);
+  emit(wishlistListeners);
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === CART_STORAGE_KEY) {
+      cartItems = safeParse<CartItem[]>(event.newValue, []);
+      emit(cartListeners);
+    }
+    if (event.key === WISHLIST_STORAGE_KEY) {
+      wishlistItems = safeParse<WishlistItem[]>(event.newValue, []);
+      emit(wishlistListeners);
+    }
+  });
+}
+
+const subscribeCart = (listener: Listener) => {
+  cartListeners.add(listener);
+  startHydration();
+  return () => cartListeners.delete(listener);
+};
+const subscribeWishlist = (listener: Listener) => {
+  wishlistListeners.add(listener);
+  startHydration();
+  return () => wishlistListeners.delete(listener);
+};
+const getCartSnapshot = () => cartItems;
+const getWishlistSnapshot = () => wishlistItems;
+const getServerCartSnapshot = () => [] as CartItem[];
+const getServerWishlistSnapshot = () => [] as WishlistItem[];
+
 export function useCart() {
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Hydrate from localStorage
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const stored = localStorage.getItem(CART_STORAGE_KEY);
-        setItems(stored ? JSON.parse(stored) : []);
-      } finally {
-        setIsHydrated(true);
-      }
-    }
-  }, []);
-
-  // Persist to localStorage
-  useEffect(() => {
-    if (isHydrated && typeof window !== "undefined") {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-    }
-  }, [items, isHydrated]);
-
-  const addItem = useCallback(
-    (item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
-      setItems((prev) => {
-        const existing = prev.find((i) => i.productSlug === item.productSlug);
-        if (existing) {
-          return prev.map((i) =>
-            i.productSlug === item.productSlug ? { ...i, quantity: i.quantity + (item.quantity || 1) } : i
-          );
-        }
-        return [...prev, { ...item, quantity: item.quantity || 1 }];
-      });
-    },
-    []
+  const items = useSyncExternalStore(subscribeCart, getCartSnapshot, getServerCartSnapshot);
+  const isHydrated = useSyncExternalStore(
+    subscribeCart,
+    () => cartHydrated,
+    () => false
   );
 
+  const addItem = useCallback((item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
+    const amount = item.quantity && item.quantity > 0 ? item.quantity : 1;
+    const existing = cartItems.find((i) => i.productSlug === item.productSlug);
+    if (existing) {
+      cartItems = cartItems.map((i) =>
+        i.productSlug === item.productSlug ? { ...i, quantity: i.quantity + amount } : i
+      );
+    } else {
+      cartItems = [...cartItems, { ...item, quantity: amount }];
+    }
+    persistCart();
+    emit(cartListeners);
+  }, []);
+
   const removeItem = useCallback((slug: string) => {
-    setItems((prev) => prev.filter((i) => i.productSlug !== slug));
+    cartItems = cartItems.filter((i) => i.productSlug !== slug);
+    persistCart();
+    emit(cartListeners);
   }, []);
 
   const updateQuantity = useCallback((slug: string, quantity: number) => {
     if (quantity <= 0) {
-      removeItem(slug);
+      cartItems = cartItems.filter((i) => i.productSlug !== slug);
     } else {
-      setItems((prev) => prev.map((i) => (i.productSlug === slug ? { ...i, quantity } : i)));
+      cartItems = cartItems.map((i) => i.productSlug === slug ? { ...i, quantity } : i);
     }
-  }, [removeItem]);
-
-  const clearCart = useCallback(() => {
-    setItems([]);
+    persistCart();
+    emit(cartListeners);
   }, []);
 
-  const getTotal = () => {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
+  const clearCart = useCallback(() => {
+    cartItems = [];
+    persistCart();
+    emit(cartListeners);
+  }, []);
 
-  const getCount = () => {
-    return items.reduce((count, item) => count + item.quantity, 0);
-  };
+  const getTotal = useCallback(() => items.reduce((total, item) => total + item.price * item.quantity, 0), [items]);
+  const getCount = useCallback(() => items.reduce((count, item) => count + item.quantity, 0), [items]);
+
+  useEffect(() => {
+    startHydration();
+  }, []);
 
   return { items, addItem, removeItem, updateQuantity, clearCart, getTotal, getCount, isHydrated };
 }
 
-// Wishlist Management
 export function useWishlist() {
-  const [items, setItems] = useState<WishlistItem[]>([]);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Hydrate from localStorage
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const stored = localStorage.getItem(WISHLIST_STORAGE_KEY);
-        setItems(stored ? JSON.parse(stored) : []);
-      } finally {
-        setIsHydrated(true);
-      }
-    }
-  }, []);
-
-  // Persist to localStorage
-  useEffect(() => {
-    if (isHydrated && typeof window !== "undefined") {
-      localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
-    }
-  }, [items, isHydrated]);
+  const items = useSyncExternalStore(subscribeWishlist, getWishlistSnapshot, getServerWishlistSnapshot);
+  const isHydrated = useSyncExternalStore(
+    subscribeWishlist,
+    () => wishlistHydrated,
+    () => false
+  );
 
   const addItem = useCallback((item: WishlistItem) => {
-    setItems((prev) => {
-      if (!prev.some((i) => i.productSlug === item.productSlug)) {
-        return [...prev, item];
-      }
-      return prev;
-    });
+    if (!wishlistItems.some((i) => i.productSlug === item.productSlug)) {
+      wishlistItems = [...wishlistItems, item];
+      persistWishlist();
+      emit(wishlistListeners);
+    }
   }, []);
 
   const removeItem = useCallback((slug: string) => {
-    setItems((prev) => prev.filter((i) => i.productSlug !== slug));
+    wishlistItems = wishlistItems.filter((i) => i.productSlug !== slug);
+    persistWishlist();
+    emit(wishlistListeners);
   }, []);
 
   const toggleItem = useCallback((item: WishlistItem) => {
-    setItems((prev) => {
-      if (prev.some((i) => i.productSlug === item.productSlug)) {
-        return prev.filter((i) => i.productSlug !== item.productSlug);
-      }
-      return [...prev, item];
-    });
+    if (wishlistItems.some((i) => i.productSlug === item.productSlug)) {
+      wishlistItems = wishlistItems.filter((i) => i.productSlug !== item.productSlug);
+    } else {
+      wishlistItems = [...wishlistItems, item];
+    }
+    persistWishlist();
+    emit(wishlistListeners);
   }, []);
 
   const toggleItemBySlug = useCallback((slug: string) => {
-    setItems((prev) => {
-      if (prev.some((i) => i.productSlug === slug)) {
-        return prev.filter((i) => i.productSlug !== slug);
-      }
-      return prev;
-    });
+    wishlistItems = wishlistItems.filter((i) => i.productSlug !== slug);
+    persistWishlist();
+    emit(wishlistListeners);
   }, []);
 
-  const contains = (slug: string) => {
-    return items.some((i) => i.productSlug === slug);
-  };
+  const contains = useCallback((slug: string) => items.some((i) => i.productSlug === slug), [items]);
+  const getCount = useCallback(() => items.length, [items]);
 
-  const getCount = () => {
-    return items.length;
-  };
+  useEffect(() => {
+    startHydration();
+  }, []);
 
   return { items, addItem, removeItem, toggleItem, toggleItemBySlug, contains, getCount, isHydrated };
 }
