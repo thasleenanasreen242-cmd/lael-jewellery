@@ -1,59 +1,36 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { products } from "@/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://lael-jewellery.vercel.app";
-  const now = new Date().toISOString();
+  const now = new Date();
 
-  // Static pages
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/shop`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/story`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/journal`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/care`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/find-your-style`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-  ];
+  const staticRoutes = [
+    ["/", 1],
+    ["/shop", 0.9],
+    ["/story", 0.8],
+    ["/journal", 0.8],
+    ["/care", 0.7],
+    ["/find-your-style", 0.7],
+    ["/contact", 0.6],
+    ["/faq", 0.6],
+    ["/shipping", 0.6],
+  ] as const;
 
-  // Product pages
+  const staticPages: MetadataRoute.Sitemap = staticRoutes.map(([route, priority]) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: now,
+    changeFrequency: route === "/" || route === "/shop" ? "weekly" : "monthly",
+    priority,
+  }));
+
   const productPages: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${baseUrl}/shop/${product.slug}`,
     lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
+    changeFrequency: "monthly",
+    priority: 0.8,
   }));
 
-  // Journal article pages
   const articleSlugs = [
     "how-to-layer-necklaces",
     "anti-tarnish-jewellery-care",
@@ -66,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const articlePages: MetadataRoute.Sitemap = articleSlugs.map((slug) => ({
     url: `${baseUrl}/journal/${slug}`,
     lastModified: now,
-    changeFrequency: "monthly" as const,
+    changeFrequency: "monthly",
     priority: 0.6,
   }));
 
