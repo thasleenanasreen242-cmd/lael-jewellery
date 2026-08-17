@@ -1,0 +1,17 @@
+/* Keep every LAEL Edit product image visually consistent without changing content. */
+#edit article > div:first-child {
+  height: 400px;
+  overflow: hidden;
+}
+
+#edit article > div:first-child img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 767px) {
+  #edit article > div:first-child {
+    height: 340px;
+  }
+}
