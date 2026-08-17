@@ -1,0 +1,1 @@
+Temporary trigger for restoring the LAEL hero label to the left corner.
