@@ -3,7 +3,11 @@ export function normalizePhoneNumber(value: string) {
 }
 
 export function buildWhatsAppLink(message: string, phone?: string) {
-  const sanitizedPhone = normalizePhoneNumber(phone || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "15551234567");
+  const configuredPhone = phone || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+  const sanitizedPhone = normalizePhoneNumber(configuredPhone);
+
+  if (!sanitizedPhone) return "#";
+
   return `https://wa.me/${sanitizedPhone}?text=${encodeURIComponent(message)}`;
 }
 
