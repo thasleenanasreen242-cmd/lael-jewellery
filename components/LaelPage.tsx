@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
@@ -13,7 +14,6 @@ import {
   lookCards,
   masonryTiles,
   lifestyleMoments,
-  navigation,
   ritualMoments,
 } from "@/data/lael-data";
 
@@ -74,20 +74,20 @@ export default function LaelPage() {
 
       <header className="sticky top-0 z-40 border-b border-[#29251F]/10 bg-[#F7F1E8]/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
-          <div className="text-xl font-medium tracking-[0.18em]">LAEL</div>
+          <Link href="/" className="text-xl font-medium tracking-[0.18em]">LAEL</Link>
 
           <div className="hidden items-center gap-8 text-[0.68rem] font-medium uppercase tracking-[0.26em] text-[#29251F]/80 md:flex">
-            {navigation.map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-[#75695B]">
-                {item}
-              </a>
-            ))}
+            <Link href="/shop" className="transition hover:text-[#75695B]">SHOP</Link>
+            <Link href="/shop" className="transition hover:text-[#75695B]">EDIT</Link>
+            <Link href="/story" className="transition hover:text-[#75695B]">STORY</Link>
+            <Link href="/journal" className="transition hover:text-[#75695B]">JOURNAL</Link>
+            <Link href="/care" className="transition hover:text-[#75695B]">CARE</Link>
           </div>
 
           <div className="flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.24em] text-[#29251F]/80">
-            <button className="hidden sm:inline">Search</button>
-            <button>Wishlist</button>
-            <button>Bag</button>
+            <button className="hidden sm:inline transition hover:text-[#75695B]">Search</button>
+            <button className="transition hover:text-[#75695B]">Wishlist</button>
+            <button className="transition hover:text-[#75695B]">Bag</button>
           </div>
         </nav>
       </header>
