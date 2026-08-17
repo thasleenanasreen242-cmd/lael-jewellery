@@ -15,6 +15,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -22,6 +23,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-manrope), sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -47,4 +49,68 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+::selection {
+  background: #29251f;
+  color: #fffdf8;
+}
+
+:focus-visible {
+  outline: 2px solid #b79a6a;
+  outline-offset: 4px;
+}
+
+/* Keep the existing full homepage, but make the information hierarchy calmer. */
+main > section {
+  scroll-margin-top: 5rem;
+}
+
+main > section:not(:first-child) {
+  position: relative;
+}
+
+/* Prevent oversized editorial blocks from making the page feel unnecessarily heavy. */
+@media (min-width: 1024px) {
+  main > section {
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
+  }
+}
+
+/* A restrained luxury motion layer that works with the existing Framer Motion effects. */
+@media (prefers-reduced-motion: no-preference) {
+  main img {
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 400ms ease;
+  }
+
+  main img:hover {
+    filter: saturate(1.03) contrast(1.01);
+  }
+}
+
+@media (max-width: 767px) {
+  main > section {
+    scroll-margin-top: 4.5rem;
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
